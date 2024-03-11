@@ -1,0 +1,9 @@
+.expo
+node_modules
+android
+ios
+patches
+src/assets/**/*.json
+modules/speech/plugin/build
+
+bitbucket-pipelines.yml
