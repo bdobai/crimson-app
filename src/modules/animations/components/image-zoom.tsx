@@ -43,9 +43,8 @@ export const FullImage = () => {
       topLeftX.value = translateX.value;
       topLeftY.value = translateY.value;
     })
-    .onEnd(e => {
+    .onEnd(() => {
       savedScale.value = withTiming(Math.min(Math.max(1, scale.value), 5));
-      console.log('e', e);
     });
 
   const pan = Gesture.Pan()
@@ -54,7 +53,6 @@ export const FullImage = () => {
       initialY.value = translateY.value;
     })
     .onUpdate(e => {
-      const maxTranslateX = (SCREEN_WIDTH * scale.value - SCREEN_WIDTH) / 2;
       const maxTranslateY = (SCREEN_HEIGHT * scale.value - SCREEN_HEIGHT) / 2;
 
       translateX.value = Math.max(
@@ -71,12 +69,6 @@ export const FullImage = () => {
     })
     .onEnd(e => {
       lastOffsetX.value = lastOffsetX.value + e.translationX / scale.value;
-      const increasedWith = scale.value * SCREEN_WIDTH - SCREEN_WIDTH;
-      console.log('Increased with:', increasedWith);
-      translateX.value = withSpring(increasedWith / 2);
-      console.log('Top-left X:', topLeftX.value);
-      console.log('Top-left Y:', topLeftY.value);
-      console.log('e', { absolut: e.absoluteX, translation: e.translationX, x: e.x });
     });
 
   const doubleTap = Gesture.Tap()

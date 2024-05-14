@@ -8,12 +8,12 @@ Welcome to the React Native Animation Showcase! This project features a collecti
 2. [Animation 2: Fading Circles](#animation-2-fading-circles)
 3. [Animation 3: Spinning Square](#animation-3-spinning-square)
 
-## Animation 1: Bouncing Ball
+## Animation 1: Drag To Sort
 
 - **Description:** An animated bouncing ball that demonstrates smooth motion.
 - **Used Libraries:** React Native Animated API
 - **Media:**
-  ![Bouncing Ball](images/bouncing_ball.gif)
+  <img src="src/assets//gifs//drag-to-sort.gif" alt="Bouncing Ball" width="200" height="400">
 
 ## Animation 2: Fading Circles
 

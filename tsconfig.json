@@ -9,6 +9,7 @@
       "@app/*": ["app/*"],
       "@app/components/*": ["components/*"],
       "@animations/*": ["modules/animations/*"],
+      "@components/*": ["modules/components/*"],
     }
   },
   "include": [

@@ -19,6 +19,7 @@ module.exports = function (api) {
             '@app/components': './src/components',
             '@app/types': './src/types',
             '@animations': './src/modules/animations',
+            '@components': './src/modules/components',
           },
         },
       ],

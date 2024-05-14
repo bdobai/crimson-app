@@ -20,23 +20,13 @@ const CATEGORIES: Category[] = [
     path: 'components',
     animation: require('@app/assets/animations/astronaut_coffee.json'),
   },
-  {
-    name: 'Hooks',
-    path: 'hooks',
-    animation: require('@app/assets/animations/astronaut_crying.json'),
-  },
-  {
-    name: 'Logics',
-    path: 'logics',
-    animation: require('@app/assets/animations/astronaut_star.json'),
-  },
 ];
 
 export default function RootLoadingPage() {
   const router = useRouter();
 
   const renderItem = ({ item }: ListRenderItemInfo<Category>) => (
-    <CategoryItem category={item} onPress={() => router.push('/animations/')} />
+    <CategoryItem category={item} onPress={() => router.push(`/${item.path}/`)} />
   );
 
   return (

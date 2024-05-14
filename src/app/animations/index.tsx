@@ -25,6 +25,26 @@ const CATEGORIES: Category[] = [
     path: '/animations/onboarding/',
     animation: require('@app/assets/animations/astronaut_crying.json'),
   },
+  {
+    name: 'Graphs',
+    path: '/animations/graphs',
+    animation: require('@app/assets/animations/astronaut_star.json'),
+  },
+  {
+    name: 'Loading',
+    path: '/animations/loading-dots',
+    animation: require('@app/assets/animations/astronaut_rocket.json'),
+  },
+  {
+    name: 'Speaker Settings',
+    path: '/animations/speaker-settings',
+    animation: require('@app/assets/animations/astronaut_coffee.json'),
+  },
+  {
+    name: 'Football',
+    path: '/animations/football',
+    animation: require('@app/assets/animations/astronaut_crying.json'),
+  },
 ];
 
 export default function RootLoadingPage() {

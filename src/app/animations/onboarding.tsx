@@ -14,7 +14,6 @@ export default function App() {
   const animatedValue2 = React.useRef(new Animated.Value(0)).current;
   const sliderAnimatedValue = React.useRef(new Animated.Value(0)).current;
   const inputRange = [...Array(colors.length).keys()];
-  console.log({ inputRange });
   const [index, setIndex] = React.useState(0);
 
   const animate = (i: number) =>
