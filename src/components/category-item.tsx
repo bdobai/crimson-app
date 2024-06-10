@@ -1,6 +1,4 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native';
-
-import LottieView from 'lottie-react-native';
+import { Pressable, StyleSheet, Text } from 'react-native';
 
 import { Category } from '../types/category';
 
@@ -9,10 +7,9 @@ type Props = {
   onPress: (category: Category) => void;
 };
 
-export const CategoryItem = ({ category, size, onPress }: Props) => {
+export const CategoryItem = ({ category, onPress }: Props) => {
   return (
     <Pressable style={styles.container} onPress={() => onPress(category)}>
-      <LottieView autoPlay source={category.animation} style={styles.animation} />
       <Text style={styles.title}>{category.name}</Text>
     </Pressable>
   );
@@ -20,18 +17,19 @@ export const CategoryItem = ({ category, size, onPress }: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    width: '45%',
-    aspectRatio: 1,
+    width: '100%',
     justifyContent: 'center',
-    alignItems: 'center',
+    // alignItems: 'center',
     backgroundColor: 'rgb(18, 44, 61)',
     borderRadius: 16,
     marginBottom: 16,
+    paddingLeft: 16,
   },
   title: {
     color: '#FFFFFF',
     fontSize: 16,
     fontWeight: 'bold',
+    paddingVertical: 16,
   },
   animation: {
     width: 100,

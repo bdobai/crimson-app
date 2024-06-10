@@ -24,7 +24,6 @@ const CATEGORIES: Category[] = [
 
 export default function RootLoadingPage() {
   const router = useRouter();
-
   const renderItem = ({ item }: ListRenderItemInfo<Category>) => (
     <CategoryItem category={item} onPress={() => router.push(`/${item.path}/`)} />
   );
@@ -33,15 +32,13 @@ export default function RootLoadingPage() {
     <View style={styles.container}>
       <StatusBar barStyle="light-content" />
       <SafeAreaView />
-      <LogoIcon width={124} height={124} />
+      <LogoIcon width={124} height={124} style={{ alignSelf: 'center' }} />
       <View style={styles.crimsonLine} />
       <View style={styles.crimsonLine2} />
       <FlatList
         data={CATEGORIES}
         renderItem={renderItem}
-        numColumns={2}
         style={styles.list}
-        columnWrapperStyle={styles.columnWrapper}
         contentContainerStyle={styles.contentContainer}
       />
     </View>
@@ -53,17 +50,13 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     justifyContent: 'flex-start',
-    alignItems: 'center',
     backgroundColor: 'rgb(13,34,47)',
-  },
-  columnWrapper: {
-    justifyContent: 'space-between',
-    alignItems: 'center',
   },
   list: {
     marginTop: 48,
   },
   contentContainer: {
+    width: '100%',
     paddingHorizontal: 16,
   },
   crimsonLine: {

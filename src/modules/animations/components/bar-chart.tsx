@@ -1,20 +1,8 @@
 import React from 'react';
 import { Dimensions, StyleSheet, View } from 'react-native';
+import { Easing, useDerivedValue, useSharedValue, withTiming } from 'react-native-reanimated';
 
-import {
-  Canvas,
-  Easing,
-  Line,
-  Path,
-  Rect,
-  Skia,
-  Text,
-  point,
-  runTiming,
-  useComputedValue,
-  useFont,
-  useValue,
-} from '@shopify/react-native-skia';
+import { Canvas, Line, Path, Skia, Text, point, useFont } from '@shopify/react-native-skia';
 import { max, scaleLinear, scalePoint } from 'd3';
 
 import { Button } from '@app/components/button';
@@ -82,28 +70,28 @@ export const BarChart = () => {
   const font = useFont(require('../../../../assets/fonts/SpaceMono-Regular.ttf'), 12);
 
   const data = [data1, data2, data3];
-  const transitionState = useValue({
+  const transitionState = useSharedValue({
     current: 0,
     next: 1,
   });
 
-  const xDomain = data[transitionState.current.current].map(i => i.label);
+  const xDomain = data[transitionState.value.current].map(i => i.label);
   const xRange = [0, GRAPH_WIDTH];
   const x = scalePoint().domain(xDomain).range(xRange).padding(1);
 
-  const yDomain = [0, max(data[transitionState.current.current], d => d.value)!];
+  const yDomain = [0, max(data[transitionState.value.current], d => d.value)!];
   const yRange = [0, GRAPH_HEIGHT];
   const y = scaleLinear().domain(yDomain).range(yRange);
-  const animationState = useValue(0);
+  const animationState = useSharedValue(0);
 
-  const graphPath = useComputedValue(() => {
+  const graphPath = useDerivedValue(() => {
     const newPath = Skia.Path.Make();
-    data[transitionState.current.current].forEach((point: DataPoint) => {
+    data[transitionState.value.current].forEach((point: DataPoint) => {
       const rect = Skia.XYWHRect(
         (x(point.label) as number) - GRAPH_BAR_WIDTH / 2,
         GRAPH_HEIGHT,
         GRAPH_BAR_WIDTH,
-        y(point.value * -animationState.current),
+        y(point.value * -animationState.value),
       );
 
       const roundedRect = Skia.RRectXY(rect, 8, 8);
@@ -113,34 +101,27 @@ export const BarChart = () => {
   }, [animationState, transitionState]);
 
   const onShow = () => {
-    // if (animationState.current === 1) {
-    //   runTiming(animationState, 0, {
-    //     duration: 1500,
-    //     easing: Easing.inOut(Easing.exp),
-    //   });
-    // }
-    runTiming(animationState, 1, {
+    animationState.value = withTiming(1, {
       duration: 1500,
       easing: Easing.inOut(Easing.exp),
     });
   };
 
   const onChange = (target: number) => {
-    runTiming(
-      animationState,
+    animationState.value = withTiming(
       0,
       {
         duration: 750,
         easing: Easing.inOut(Easing.exp),
       },
       () => {
-        transitionState.current = {
+        transitionState.value = {
           current: target,
-          next: transitionState.current.current,
+          next: transitionState.value.current,
         };
-        animationState.current = 0;
+        animationState.value = 0;
 
-        runTiming(animationState, 1, {
+        animationState.value = withTiming(1, {
           duration: 750,
           easing: Easing.inOut(Easing.exp),
         });
@@ -168,8 +149,8 @@ export const BarChart = () => {
           p2={point(GRAPH_WIDTH, GRAPH_HEIGHT)}
         />
         <Path path={graphPath} color="white" />
-        {data[transitionState.current.current].map((point: DataPoint) => {
-          const textWidth = font.getTextWidth(point.label);
+        {data[transitionState.value.current].map((point: DataPoint) => {
+          const textWidth = 50; // font.getTextWidth(point.label);
           return (
             <Text
               key={point.label}

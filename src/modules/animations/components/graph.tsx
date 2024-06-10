@@ -1,19 +1,9 @@
 import React from 'react';
 import { Dimensions, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Easing, useDerivedValue, useSharedValue, withTiming } from 'react-native-reanimated';
 
 import { DataPoint, animatedData, originalData } from '@animations/helpers/data';
-import {
-  Canvas,
-  Easing,
-  Line,
-  Path,
-  SkPath,
-  Skia,
-  runTiming,
-  useComputedValue,
-  useValue,
-  vec,
-} from '@shopify/react-native-skia';
+import { Canvas, Line, Path, SkPath, Skia, vec } from '@shopify/react-native-skia';
 import { curveBasis, line, scaleLinear, scaleTime } from 'd3';
 
 import { Button } from '@app/components/button';
@@ -30,8 +20,8 @@ const GRAPH_HEIGHT = 320;
 const GRAPH_WIDTH = Dimensions.get('window').width - 48;
 
 export const Graph = (props: Props) => {
-  const isTransitionCompleted = useValue(1);
-  const transitionState = useValue({
+  const isTransitionCompleted = useSharedValue(1);
+  const transitionState = useSharedValue({
     currentChart: 0,
     nextChart: 1,
   });
@@ -62,22 +52,22 @@ export const Graph = (props: Props) => {
   const graphData = [makeGraph(originalData), makeGraph(animatedData)];
 
   const transitionCharts = (target: number) => {
-    transitionState.current = {
+    transitionState.value = {
       currentChart: target,
-      nextChart: transitionState.current.currentChart,
+      nextChart: transitionState.value.currentChart,
     };
-    isTransitionCompleted.current = 0;
+    isTransitionCompleted.value = 0;
 
-    runTiming(isTransitionCompleted, 1, {
+    isTransitionCompleted.value = withTiming(1, {
       duration: 1000,
       easing: Easing.inOut(Easing.cubic),
     });
   };
 
-  const currentPath = useComputedValue(() => {
-    const start = graphData[transitionState.current.currentChart].curve;
-    const end = graphData[transitionState.current.nextChart].curve;
-    const result = start.interpolate(end, isTransitionCompleted.current);
+  const currentPath = useDerivedValue(() => {
+    const start = graphData[transitionState.value.currentChart].curve;
+    const end = graphData[transitionState.value.nextChart].curve;
+    const result = start.interpolate(end, isTransitionCompleted.value);
 
     return result?.toSVGString() ?? '';
   }, [transitionState, isTransitionCompleted]);

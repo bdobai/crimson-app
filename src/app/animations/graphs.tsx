@@ -21,9 +21,9 @@ export default function Graphs() {
         <View style={styles.slide}>
           <Chart />
         </View>
-        <View style={styles.slide}>
+        {/* <View style={styles.slide}>
           <BarChart />
-        </View>
+        </View> */}
       </ScrollView>
     </View>
   );

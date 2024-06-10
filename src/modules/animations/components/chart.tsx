@@ -1,16 +1,8 @@
 import React from 'react';
-import { Pressable, Text as RNText, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import { Easing, useSharedValue, withTiming } from 'react-native-reanimated';
 
-import {
-  Canvas,
-  Easing,
-  Path,
-  Skia,
-  Text,
-  runTiming,
-  useFont,
-  useValue,
-} from '@shopify/react-native-skia';
+import { Canvas, Path, Skia, Text, useFont } from '@shopify/react-native-skia';
 
 import { Button } from '@app/components/button';
 
@@ -22,9 +14,9 @@ const TARGET_PERCENTAGE = 0.75;
 export const Chart = () => {
   const font = useFont(require('../../../../assets/fonts/SpaceMono-Regular.ttf'), 48);
   const smallFont = useFont(require('../../../../assets/fonts/SpaceMono-Regular.ttf'), 24);
-  const animationState = useValue(0);
+  const animationState = useSharedValue(0);
 
-  const currentPercentage = useValue(0.75);
+  const currentPercentage = useSharedValue(0.75);
 
   if (!font || !smallFont) {
     return <View />;
@@ -32,7 +24,7 @@ export const Chart = () => {
 
   const animateChart = () => {
     // animationState.current = 0;
-    runTiming(animationState, currentPercentage.current, {
+    animationState.value = withTiming(currentPercentage.value, {
       duration: 1250,
       easing: Easing.inOut(Easing.cubic),
     });
@@ -48,7 +40,7 @@ export const Chart = () => {
   const smallWidth = smallFont.getTextWidth('Total');
 
   const onChange = (value: number) => {
-    currentPercentage.current = currentPercentage.current + value;
+    currentPercentage.value = currentPercentage.value + value;
     animateChart();
   };
 
