@@ -4,30 +4,46 @@ Welcome to the React Native Animation Showcase! This project features a collecti
 
 ## Table of Contents
 
-1. [Animation 1: Bouncing Ball](#animation-1-bouncing-ball)
-2. [Animation 2: Fading Circles](#animation-2-fading-circles)
-3. [Animation 3: Spinning Square](#animation-3-spinning-square)
+1. [Animation 1: Drag To Sort](#animation-1-bouncing-ball)
+2. [Animation 2: Loading](#animation-2-loading)
+3. [Animation 3: Graphs](#animation-3-graphs)
+4. [Animation 4: Sound](#animation-4-sound)
+5. [Animation 5: Steps](#animation-5-steps)
 
 ## Animation 1: Drag To Sort
 
-- **Description:** An animated bouncing ball that demonstrates smooth motion.
-- **Used Libraries:** React Native Animated API
+- **Description:** An animated list with draggable components
+- **Used Libraries:** react-native-reanimated react-native-gesture-handler
 - **Media:**
-  <img src="src/assets//gifs//drag-to-sort.gif" alt="Bouncing Ball" width="200" height="400">
+  <img src="src/assets//gifs//drag-to-sort.gif" alt="Drag to sort" width="200" height="400">
 
-## Animation 2: Fading Circles
+## Animation 2: Loading
 
-- **Description:** Circles that fade in and out, creating an eye-catching visual effect.
-- **Used Libraries:** React Native Animated API
+- **Description:** Animated loading indicators
+- **Used Libraries:** react-native-reanimated
 - **Media:**
-  ![Fading Circles](images/fading_circles.gif)
+  <img src="src/assets//gifs//loading.gif" alt="Loading" width="200" height="400">
 
-## Animation 3: Spinning Square
+## Animation 3: Graphs
 
-- **Description:** A square that rotates continuously, showcasing rotation animation.
-- **Used Libraries:** React Native Animated API
+- **Description:** Animated graphs.
+- **Used Libraries:** @shopify/react-native-skia react-native-reaniamted
 - **Media:**
-  ![Spinning Square](images/spinning_square.gif)
+  <img src="src/assets//gifs//graphs.gif" alt="Graphs" width="200" height="400">
+
+## Animation 4: Sound
+
+- **Description:** An animated sound settings interface
+- **Used Libraries:** react-native-reanimated react-native-gesture-handler
+- **Media:**
+  <img src="src/assets//gifs//sound.gif" alt="Sound" width="200" height="400">
+
+## Animation 5: Steps
+
+- **Description:** An animated todo list
+- **Used Libraries:** @shopify/react-native-skia react-native-reaniamted
+- **Media:**
+  <img src="src/assets//gifs//steps.gif" alt="Steps" width="200" height="400">
 
 ## How to Run
 
